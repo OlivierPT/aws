@@ -1,0 +1,28 @@
+---
+- hosts: rhel7-1
+  sudo: yes
+  vars:
+    metricbeat_version: 5.1.1
+
+  tasks:
+  - name: Docker install
+    yum: name=docker-engine state=present
+    when: ansible_os_family == "RedHat"
+
+  - name: Enable Docker
+    service: name=docker enabled=yes state=started
+
+  - name: User in Docker group
+    user: name=ec2-user groups=docker append=yes
+    notify:
+      - Restart Docker
+
+  - name: Install Metricbeat
+    yum: name=https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-5.1.1-x86_64.rpm state=present
+
+  - name: Install Filebeat
+    yum: name=https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-x86_64.rpm state=present
+
+  handlers:
+  - name: Restart Docker
+    service: name=docker state=restarted
