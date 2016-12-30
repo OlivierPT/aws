@@ -1,0 +1,12 @@
+---
+- name: Docker install
+  yum: name=docker-engine state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Enable Docker
+  service: name=docker enabled=yes state=started
+
+- name: User in Docker group
+  user: name=ec2-user groups=docker append=yes
+  notify:
+    - Restart Docker
