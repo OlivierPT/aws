@@ -1,0 +1,22 @@
+# demo_setup.yml
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+
+    - name: Provision cluster instances
+      ec2:
+         key_name: rhel7-1
+         group: launch-wizard-1
+         instance_type: t2.micro
+         image: ami-6f68cf0f
+         wait: true
+         state: stopped
+         region: us-west-2
+         count_tag:
+            Name: ClusterNode
+         instance_tags:
+            Name: ClusterNode
+      register: ec2
