@@ -1,0 +1,19 @@
+---
+  - name: Add XPRA Repository
+    yum_repository:
+      name: WinSwitch Repository
+      description: XPRA/WinSwitch YUM repo
+      baseurl: https://winswitch.org/downloads/CentOS/winswitch.repo
+      gpgkey: https://winswitch.org/gpg.asc
+      gpgcheck: yes
+
+  - name: Install XPRA
+    yum: name=xpra state=present
+    when: ansible_os_family == "RedHat"
+
+  - name: Add to XPRA Group
+    user: name=ec2-user groups=xpra append=yes
+
+  - name: Install Xterm
+    yum: name=xterm state=present
+    when: ansible_os_family == "RedHat"
