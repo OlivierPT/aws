@@ -1,7 +1,15 @@
 ---
-- name: Docker install
-  yum: name=docker-engine state=present
-  when: ansible_os_family == "RedHat"
+- name: Install Docker Repo Package
+  yum_repository:
+    name: Docker
+    description: Docker YUM repo
+    baseurl: https://yum.dockerproject.org/repo/main/centos/7/
+    gpgcheck: yes
+    gpgkey: https://yum.dockerproject.org/gpg
+
+- name: Install Docker
+  yum: name=docker-engine state=latest
+  tags: docker
 
 - name: Enable Docker
   service: name=docker enabled=yes state=started
