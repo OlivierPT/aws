@@ -6,6 +6,7 @@
     baseurl: https://yum.dockerproject.org/repo/main/centos/7/
     gpgcheck: yes
     gpgkey: https://yum.dockerproject.org/gpg
+  when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7")
 
 - name: Install Docker
   yum: name=docker-engine state=latest

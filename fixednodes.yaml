@@ -1,6 +1,6 @@
 ---
-- hosts: rhel7-1
-  sudo: yes
+- hosts: allnodes
+  become: yes
   roles:
   - common
   - xpra
