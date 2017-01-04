@@ -1,7 +1,8 @@
 ---
   - name: Add XPRA Repository
     yum_repository:
-      description: name: WinSwitch Repository
+      name: WinSwitch
+      description: WinSwitch Repository
       baseurl: http://winswitch.org/dists/CentOS/$releasever/$basearch/
       gpgkey: https://winswitch.org/gpg.asc
       gpgcheck: yes

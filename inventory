@@ -1,11 +1,10 @@
 [allnodes]
 ec2-35-166-250-27.us-west-2.compute.amazonaws.com
-ec2-35-164-136-188.us-west-2.compute.amazonaws.com
-ec2-35-166-88-68.us-west-2.compute.amazonaws.com
+ec2-35-164-147-208.us-west-2.compute.amazonaws.com
 
 [rhelnodes]
 ec2-35-166-250-27.us-west-2.compute.amazonaws.com
-ec2-35-164-136-188.us-west-2.compute.amazonaws.com
+ec2-35-164-147-208.us-west-2.compute.amazonaws.com
 
 [collectsrv]
 ec2-35-164-136-188.us-west-2.compute.amazonaws.com

@@ -1,5 +1,5 @@
 ---
-- hosts: allnodes
+- hosts: rhelnodes
   name: configuration play
   gather_facts: true
   become: yes
