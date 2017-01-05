@@ -11,6 +11,7 @@
 - name: Install Docker
   yum: name=docker-engine state=latest
   tags: docker
+  when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7")
 
 - name: Enable Docker
   service: name=docker enabled=yes state=started
@@ -19,3 +20,19 @@
   user: name=ec2-user groups=docker append=yes
   notify:
     - Restart Docker
+
+- name: Check Docker compose bin file presence
+  stat: path=/usr/local/bin/docker-compose
+  register: dockercompose
+
+- name: Install Docker Compose
+  pip:
+    name: docker-compose
+    extra_args: --force --upgrade
+  when: dockercompose.stat.exists == false
+
+- name: Install Docker-Py 1.9 (because of Ansible bug)
+  pip:
+    name: docker-py
+    version: 1.9.0
+    extra_args: --force-reinstall

@@ -1,7 +1,6 @@
 ---
 - hosts: rhelnodes
-  name: configuration play
+  name: Deploy monitoring collect play
   gather_facts: true
-  become: yes
   roles:
-  - common
+  - collect

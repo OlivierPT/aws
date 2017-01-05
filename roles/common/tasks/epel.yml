@@ -1,0 +1,15 @@
+---
+- name: Install Wget
+  yum: name=wget state=latest
+  when: (ansible_os_family == "RedHat")
+
+- name: Download EPEL Package
+  shell: wget -r --no-parent -nd -P /tmp -A 'epel-release-*.rpm' http://dl.fedoraproject.org/pub/epel/7/x86_64/e/
+
+- name: Rename file
+  shell: mv /tmp/epel-release-*.noarch.rpm /tmp/epel-release.noarch.rpm
+
+- name: Install EPEL Repo
+  yum:
+    name: /tmp/epel-release.noarch.rpm
+    state: present

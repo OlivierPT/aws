@@ -1,0 +1,7 @@
+---
+- copy:
+    src: files/collectqueueredis-5
+    dest: /tmp/compose/
+
+- docker_service:
+    project_src: /tmp/compose/collectqueueredis-5
